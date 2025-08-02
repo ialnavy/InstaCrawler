@@ -117,19 +117,43 @@ python main.py not_following_back
 
 ---
 
-## 🗂️ Project Structure
+## 🏗️ Design and Architecture
 
-- `main.py` — CLI entry point
-- `app/` — App logic & commands
-- `entities/` — Data models & selectors
-- `marionette/` — Browser automation
-- `.env` — Config file
-- `requirements.txt` — Python dependencies
+### Cause
+
+Although Python is not traditionally classified as a purely OOP language, I have chosen to adopt an architecture grounded in this paradigm. This decision is driven by the desire to introduce a high level of standardization and modularity into the application's design. By leveraging OOP principles, such as encapsulation, inheritance, and polymorphism, the codebase becomes more maintainable, scalable, and easier to understand.
+
+Furthermore, this approach aligns well with the design philosophies outlined in the [GoF design patterns](https://en.wikipedia.org/wiki/Design_Patterns). These patterns offer proven solutions to common software design problems and promote best practices in software engineering. By integrating these patterns into the architecture, the application benefits from a robust and consistent structure that enhances both development efficiency and long-term code quality.
+
+### Diagram
+
+The application's architecture is built around the [Command design pattern](https://en.wikipedia.org/wiki/Command_pattern), leveraging its Macro-Command variant to deliver a highly modular and extensible solution. Each terminal instruction is encapsulated as a Macro-Command — a structured sequence of individual Commands, each representing a distinct operational step. This approach offers several key benefits:
+
+- **Decoupling of responsibilities**: Commands encapsulate specific actions, allowing the system to separate the logic of executing operations from the objects that invoke them.
+- **Reusability and composability**: Individual Commands can be reused across different Macro-Commands, promoting cleaner code and reducing duplication.
+- **Flexibility through strategy integration**: Each Command can incorporate its own strategy, enabling dynamic behavior customization without altering the core structure.
+- **Ease of extension and maintenance**: New functionality can be added simply by introducing new Commands or modifying existing ones, without disrupting the overall system.
+- **Support for undo/redo and logging**: The Command pattern naturally supports features like undo/redo operations and action logging, which are valuable in complex applications.
+
+By adopting this pattern, the application gains a robust and scalable foundation that simplifies command execution, enhances maintainability, and empowers future growth.
+
+The Selenium WebDriver marionette is encapsulated inside a hierarchy headed by the abstract class `AbstractNavigatorMarionette`. This abstract class defines several abstract methods `init_<xxx>`, which are intended to initialise common configuration for the Marionette. These methods are invoked in the constructor of this abstract class, and must be overriden by each concrete class. This is an application of the [Template method pattern](https://en.wikipedia.org/wiki/Template_method_pattern).
+
+```py
+    @abstractmethod
+    def init_<xxx>(self):
+        pass # To be overriden
+```
+
+The `InstagramUser` class helps me define the `str()` method as I wish, for the entry of each Instagram user found in the output list. There is another type in the diagram called `UsersAsDomElements`, which may be a type of BeautifulSoup idk.
+
+![InstaCrawler Class Diagram](multimedia/readme/InstaCrawler_class_diagram.svg "InstaCrawler Class Diagram")
 
 ---
 
 ## 🔮 Envisaged Extensions
 
+- [ ] Replace the `InstagramSelectors` class with a YAML file.
 - [ ] Add support for other browsers (Chrome, Firefox, etc.)
 - [ ] Implement headless mode for background operation
 - [ ] Export results to CSV or Excel

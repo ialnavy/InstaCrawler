@@ -1,0 +1,121 @@
+@startuml
+package "marionette" as marionette {
+  abstract class "AbstractNavigatorMarionette" as anm {
+    webdriver_path : str
+    user_data_dir : str
+    delay_of_page_load : int
+
+    set_delay_of_page_load(delay : int) : void
+    get_html_content() : str
+    navigate(url : str, wait : bool) : void
+    navigate_and_wait_forever(url : str) : void
+    click(css_selector : str, wait : bool) : void
+    scroll_down(css_selector : str, wait : bool) : void
+    quit() : void
+  }
+
+  class "UserLikeMsEdgeNav" as ulmen {
+    init_options() : void
+    init_service() : void
+    init_driver() : void
+  }
+
+  ulmen -up-|> anm
+}
+
+
+package "entities" as entities {
+  class "InstagramUser" as user {
+    user_id : str
+    full_name : str
+  }
+}
+
+package "commands" as commands {
+  interface "Command" as c {
+    execute() : obj
+  }
+
+  class "CommandFactory" as cf {
+    +{static}for_create_marionette() : Command
+    +{static}for_verify_login(marionette : AbstractNavigatorMarionette,\n is_manual_verification : bool) : Command
+    +{static}for_scrap_users(marionette: AbstractNavigatorMarionette,\n users_container_selector : str) : Command
+    +{static}for_destroy_marionette(marionette: AbstractNavigatorMarionette) : Command
+  }
+
+  class "CreateUserLikeNav" as culn {
+    execute() : AbstractNavigatorMarionette
+  }
+  culn -up-|> c
+  cf -down-> culn
+
+  class "DestroyMarionette" as dm {
+    execute() : void
+  }
+  dm -up-|> c
+  cf -down-> dm
+
+  class "VerifyLogin" as vl {
+    execute() : void
+  }
+  vl -up-|> c
+  cf -down-> vl
+
+  class "ScrapUsersFromHtml" as sufh {
+    execute() : void
+  }
+  sufh -up-|> c
+  cf -down-> sufh
+
+  package "scrapUsers.strategies" as su_str {
+    class "ScrapUsersStrategiesFactory" as susf {
+      +{static}for_list_users_dom() : ListUsersDom
+      +{static}for_scrap_users_dom() : ScrapUsersDom
+      +{static}for_refine_users() : RefineUsers
+    }
+
+    class "ListUsersDom" as su_str_lud {
+      +do_list_users_dom(marionette\n : AbstractNavigatorMarionette) : UsersAsDomElements[]
+    }
+    susf --> su_str_lud
+
+    class "RefineUsers" as su_str_ru {
+      +do_refine_users(users_as_dom_elements\n : UsersAsDomElements) : InstagramUser[]
+    }
+    susf --> su_str_ru
+
+    class "ScrapUsersDom" as su_str_sud {
+      +do_scrap_users_dom(marionette\n : AbstractNavigatorMarionette) : void
+    }
+    susf --> su_str_sud
+    note top of su_str_sud
+      This class makes use of
+      environment parameters
+      related to wait times.
+    end note
+
+    sufh --> susf
+  }
+}
+
+
+class "MacroUsersNotFollowingBack" as macro_nfb {
+  marionette : AbstractNavigatorMarionette
+  followers : InstagramUser[]
+  following : InstagramUser[]
+  commands : Command[]
+
+  execute() : obj
+}
+
+note left of macro_nfb::execute
+  for command in self.commands:
+    command.execute()
+end note
+
+macro_nfb "1" -right-* "1" anm
+macro_nfb "1" -up-* "N" user
+macro_nfb "1" -down-* "N" c
+
+macro_nfb -down-> cf
+@enduml

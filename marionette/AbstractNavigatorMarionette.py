@@ -32,15 +32,15 @@ class AbstractNavigatorMarionette(ABC):
 
     @abstractmethod
     def init_options(self):
-        pass # To be overridden
+        pass # To be overriden
 
     @abstractmethod
     def init_service(self):
-        pass # To be overridden
+        pass # To be overriden
     
     @abstractmethod
     def init_driver(self):
-        pass # To be overridden
+        pass # To be overriden
 
 
     def set_delay_of_page_load(self, delay):
