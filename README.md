@@ -4,6 +4,15 @@ Would you like to automatise crawling tasks on Instagram? **InstaCrawler** is yo
 
 Last tested with Python 3.12.6 🐍 on PowerShell 7.5.2.0 (Windows 11 23H2).
 
+Feel free to [contact me](mailto:ial.navy@protonmail.ch)!
+
+---
+
+## ⚠️ DISCLAIMER!
+
+- FOR PERSONAL USE ONLY! ⚠️
+- Use responsibly and respect Instagram’s terms of service! 🙏
+
 ---
 
 ## ✨ Features
@@ -117,11 +126,17 @@ python main.py not_following_back
 
 ---
 
-## ⚠️ Notes
+## 🔮 Envisaged Extensions
 
-- Uses your existing Edge browser profile for authentication.
-- Instagram UI changes may require updates to selectors in [`entities/InstagramSelectors.py`](entities/InstagramSelectors.py).
-- Use responsibly and respect Instagram’s terms of service! 🙏
+- [ ] Add support for other browsers (Chrome, Firefox, etc.)
+- [ ] Implement headless mode for background operation
+- [ ] Export results to CSV or Excel
+- [ ] Add more Instagram automation features (e.g., auto-like, auto-comment, auto-download of images and videos)
+- [ ] Support for multi-account management
+
+Future changes of the Instagram UI from Meta may require updates, such as to selectors in [`entities/InstagramSelectors.py`](entities/InstagramSelectors.py).
+
+Feel free to suggest or contribute new by creating issues in this repo!
 
 ---
 
