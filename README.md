@@ -1,37 +1,44 @@
-# InstaCrawler
+# 📸 InstaCrawler
 
-InstaCrawler is an automated tool for scraping Instagram user data using Selenium and BeautifulSoup. It can log in to Instagram, retrieve lists of followers and following, and identify users who do not follow you back. The automation is designed to mimic human browser behavior to avoid detection.
+**InstaCrawler** is your automated sidekick for scraping Instagram user data using Selenium 4.34.2 and BeautifulSoup 4.12.2!  
+It logs in, grabs your followers/following lists, and spots who’s not following you back — all while mimicking real human browsing to stay under the radar. 🕵️‍♂️
 
-## Features
+---
 
-- Automated login to Instagram (manual login supported)
-- Scrape followers and following lists
-- Identify users not following you back
-- Uses Microsoft Edge WebDriver for browser automation
-- Configurable scraping cadence and browser profile
+## ✨ Features
 
-## Requirements
+- 🤖 Automated (or manual) Instagram login
+- 📋 Scrape followers & following lists
+- 🚦 Find out who’s not following you back
+- 🖥️ Uses Microsoft Edge WebDriver for browser automation
+- ⚙️ Customizable scraping speed & browser profile
+
+---
+
+## 🛠️ Requirements
 
 - Python 3.8+
 - Microsoft Edge browser
 - Microsoft Edge WebDriver (`msedgedriver.exe`)
 - Instagram account
 
-## Installation
+---
 
-1. **Clone the repository**  
+## 🚀 Installation
+
+1. **Clone the repo**
    ```sh
    git clone <your-repo-url>
    cd InstaCrawler
    ```
 
-2. **Install dependencies**  
+2. **Install dependencies**
    ```sh
    pip install -r requirements.txt
    ```
 
 3. **Configure environment variables**  
-   Edit the `.env` file to set the paths for your Edge user data directory and WebDriver, and adjust scraping parameters if needed.
+   Edit the `.env` file to set your Edge user data directory, WebDriver path, and scraping parameters.
 
    Example:
    ```
@@ -42,45 +49,53 @@ InstaCrawler is an automated tool for scraping Instagram user data using Seleniu
    SECONDS_TO_WAIT_FOR_USERS_CONTAINER_TO_LOAD=1.5
    ```
 
-## Usage
+---
 
-Run the main script with one of the available commands:
+## 🏁 Usage
+
+Run the main script with a command:
 
 ```sh
 python main.py <order>
 ```
 
-### Available Orders
+### 📚 Available Orders
 
-- `help` — Show usage information
-- `manual_login` — Open Instagram and allow you to log in manually
-- `not_following_back` — Retrieve and print users you follow who do not follow you back
+- `help` — Show usage info
+- `manual_login` — Open Instagram for manual login
+- `not_following_back` — List users you follow who don’t follow you back
 
-### Example
+### 💡 Example
 
 ```sh
 python main.py manual_login
 # Log in to Instagram in the opened browser window, then close it.
 
 python main.py not_following_back
-# The script will print the list of users not following you back.
+# See who’s not following you back!
 ```
 
-## Project Structure
+---
 
-- `main.py` — Entry point for the CLI
-- `app/` — Application logic and command definitions
-- `entities/` — Data models and selectors
-- `marionette/` — Browser automation classes
-- `.env` — Environment configuration
+## 🗂️ Project Structure
+
+- `main.py` — CLI entry point
+- `app/` — App logic & commands
+- `entities/` — Data models & selectors
+- `marionette/` — Browser automation
+- `.env` — Config file
 - `requirements.txt` — Python dependencies
 
-## Notes
+---
 
-- The script uses your existing Edge browser profile for authentication.
+## ⚠️ Notes
+
+- Uses your existing Edge browser profile for authentication.
 - Instagram UI changes may require updates to selectors in [`entities/InstagramSelectors.py`](entities/InstagramSelectors.py).
-- Use responsibly and respect Instagram's terms of service.
+- Use responsibly and respect Instagram’s terms of service! 🙏
 
-## License
+---
+
+## 📄 License
 
 MIT
