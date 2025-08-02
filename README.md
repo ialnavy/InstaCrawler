@@ -65,7 +65,7 @@ InstaCrawler **does not store your info on the cloud**.
 
 ## 📜 Prerequirements
 
-The version of your MS Edge navigator, and that of your `msedgedriver.exe` **must be the same**.
+The version of your MS Edge navigator **must match** with that of your `msedgedriver.exe`.
 
 You may find the version of you MS Edge navigator in this URL: `edge://version/`.
 
