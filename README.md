@@ -21,9 +21,13 @@ All while mimicking real human browsing to stay under the radar! 🕵️‍♂�
 ## 🛠️ Requirements
 
 - Python 3.8+
-- Microsoft Edge browser
+- Microsoft Edge browser 
 - Microsoft Edge WebDriver (`msedgedriver.exe`)
 - Instagram account
+
+IMPORTANT! ⚠️
+Your Instagram log-in info **will be stored locally on your computer**.
+InstaCrawler **does not store your info on the cloud**.
 
 ---
 
