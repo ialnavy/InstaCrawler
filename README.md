@@ -2,6 +2,8 @@
 
 Would you like to automatise crawling tasks on Instagram? **InstaCrawler** is your automated sidekick! 🤖
 
+This app makes use of a Selenium WebDriver marionette to simulate user inputs, while BeautifulSoup is used to crawl the HTML DOM content of the Instagram webpage.
+
 Last tested with Python 3.12.6 🐍 on PowerShell 7.5.2.0 (Windows 11 23H2).
 
 Feel free to [contact me](mailto:ial.navy@protonmail.ch)!
