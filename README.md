@@ -1,17 +1,18 @@
 # 📸 InstaCrawler
 
-**InstaCrawler** is your automated sidekick for scraping Instagram user data using Selenium 4.34.2 and BeautifulSoup 4.12.2!  
-It logs in, grabs your followers/following lists, and spots who’s not following you back — all while mimicking real human browsing to stay under the radar. 🕵️‍♂️
+Would you like to automatise crawling tasks on Instagram? **InstaCrawler** is your automated sidekick! 🤖
+Last tested with Python 3.12.6 🐍 on PowerShell 7.5.2.0 (Windows 11 23H2).
 
 ---
 
 ## ✨ Features
 
-- 🤖 Automated (or manual) Instagram login
-- 📋 Scrape followers & following lists
-- 🚦 Find out who’s not following you back
-- 🖥️ Uses Microsoft Edge WebDriver for browser automation
-- ⚙️ Customizable scraping speed & browser profile
+- 🤖 Automated (or manual) Instagram login.
+- 📋 Scrape followers & following lists.
+- 🚦 Spot who’s not following you back.
+- 🖥️ Uses Microsoft Edge WebDriver for browser automation.
+- ⚙️ Customizable scraping speed & browser profile.
+All while mimicking real human browsing to stay under the radar! 🕵️‍♂️
 
 ---
 
