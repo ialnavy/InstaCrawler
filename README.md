@@ -1,6 +1,7 @@
 # 📸 InstaCrawler
 
 Would you like to automatise crawling tasks on Instagram? **InstaCrawler** is your automated sidekick! 🤖
+
 Last tested with Python 3.12.6 🐍 on PowerShell 7.5.2.0 (Windows 11 23H2).
 
 ---
@@ -12,6 +13,7 @@ Last tested with Python 3.12.6 🐍 on PowerShell 7.5.2.0 (Windows 11 23H2).
 - 🚦 Spot who’s not following you back.
 - 🖥️ Uses Microsoft Edge WebDriver for browser automation.
 - ⚙️ Customizable scraping speed & browser profile.
+
 All while mimicking real human browsing to stay under the radar! 🕵️‍♂️
 
 ---
