@@ -63,6 +63,16 @@ InstaCrawler **does not store your info on the cloud**.
 
 ---
 
+## 📜 Prerequirements
+
+The version of your MS Edge navigator, and that of your `msedgedriver.exe` **must be the same**.
+
+You may find the version of you MS Edge navigator here [MS Edge Version page](edge://version/).
+
+![MS Edge version check](multimedia/readme/edge-version-check-advanced.jpg "MS Edge version check")
+
+---
+
 ## 🏁 Usage
 
 Run the main script with a command:
