@@ -8,14 +8,10 @@ Last tested with Python 3.12.6 🐍 on PowerShell 7.5.2.0 (Windows 11 23H2).
 
 Feel free to [contact me](mailto:ial.navy@protonmail.ch)!
 
----
-
 ## ⚠️ DISCLAIMER!
 
 - FOR PERSONAL USE ONLY! ⚠️
 - Use responsibly and respect Instagram’s terms of service! 🙏
-
----
 
 ## ✨ Features
 
@@ -27,9 +23,9 @@ Feel free to [contact me](mailto:ial.navy@protonmail.ch)!
 
 All while mimicking real human browsing to stay under the radar! 🕵️‍♂️
 
----
+## 📖 Guide of Use
 
-## 🛠️ Requirements
+### 🛠️ Requirements
 
 - Python 3.8+
 - Microsoft Edge browser 
@@ -40,9 +36,8 @@ IMPORTANT! ⚠️
 Your Instagram log-in info **will be stored locally on your computer**.
 InstaCrawler **does not store your info on the cloud**.
 
----
 
-## 🚀 Installation
+### 🚀 Installation
 
 1. **Clone the repo**
    ```sh
@@ -72,9 +67,7 @@ InstaCrawler **does not store your info on the cloud**.
    SECONDS_TO_WAIT_FOR_USERS_CONTAINER_TO_LOAD=1.5
    ```
 
----
-
-## 📜 Prerequirements
+### 📜 Prerequirements
 
 The version of your MS Edge navigator **must match** with that of your `msedgedriver.exe`.
 
@@ -84,9 +77,7 @@ You may find the version of you MS Edge navigator in this URL: `edge://version/`
 
 You may find the MS Edge WebDriver executable file for your specific version in the [MS Edge WebDriver versions directory](https://msedgewebdriverstorage.z22.web.core.windows.net/).
 
----
-
-## 🏁 Usage
+### 🏁 Usage
 
 Run the main script with a command:
 
@@ -94,7 +85,7 @@ Run the main script with a command:
 python main.py <order>
 ```
 
-### 📚 Available Orders
+#### 📚 Available Orders
 
 - `help` — Show usage info.
 - `manual_login` — Open Instagram for manual login (if you want to change the logged-in account, for example).
@@ -102,7 +93,7 @@ python main.py <order>
 
 You need to log-in into Instagram before you invoke any operation; that is why we have the "manual_login" operation. Your log-in info will be stored among the `NAVIGATOR_DATA_DIR_OF_USER` folder contents.
 
-### 💡 Example
+#### 💡 Example
 
 ```sh
 python main.py manual_login
@@ -115,17 +106,17 @@ python main.py not_following_back
 # the more time this operation will take.
 ```
 
----
+## ℹ️ Advanced Information of the Application
 
-## 🏗️ Design & Architecture
+### 🏗️ Design & Architecture
 
-### Cause
+#### Cause
 
 Although Python is not traditionally classified as a purely OOP language, I have chosen to adopt an architecture grounded in this paradigm. This decision is driven by the desire to introduce a high level of standardization and modularity into the application's design. By leveraging OOP principles, such as encapsulation, inheritance, and polymorphism, the codebase becomes more maintainable, scalable, and easier to understand.
 
 Furthermore, this approach aligns well with the design philosophies outlined in the [GoF design patterns](https://en.wikipedia.org/wiki/Design_Patterns). These patterns offer proven solutions to common software design problems and promote best practices in software engineering. By integrating these patterns into the architecture, the application benefits from a robust and consistent structure that enhances both development efficiency and long-term code quality.
 
-### Description of the Design & Architecture
+#### Description of the Design & Architecture
 
 The application's architecture is built around the [Command design pattern](https://en.wikipedia.org/wiki/Command_pattern), leveraging its Macro-Command variant to deliver a highly modular and extensible solution. Each terminal instruction is encapsulated as a Macro-Command — a structured sequence of individual Commands, each representing a distinct operational step. This approach offers several key benefits:
 
@@ -153,9 +144,7 @@ For the sake of understanding, this UML class diagram depicts all the classes in
 
 The information described in this section may defer with the current implementation because of newer changes being implemented in the application. If that is the case and you find any mismatch, I beg you to report it to me.
 
----
-
-## 🔮 Envisaged Extensions
+### 🔮 Envisaged Extensions
 
 - [ ] Replace the `InstagramSelectors` class with a YAML file.
 - [ ] Add support for other browsers (Chrome, Firefox, etc.)
@@ -167,9 +156,3 @@ The information described in this section may defer with the current implementat
 Future changes of the Instagram UI from Meta may require updates, such as to selectors in [`entities/InstagramSelectors.py`](entities/InstagramSelectors.py).
 
 Feel free to suggest or contribute new by creating issues in this repo!
-
----
-
-## 📄 License
-
-MIT
