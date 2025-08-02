@@ -156,3 +156,10 @@ The information described in this section may defer with the current implementat
 Future changes of the Instagram UI from Meta may require updates, such as to selectors in [`entities/InstagramSelectors.py`](entities/InstagramSelectors.py).
 
 Feel free to suggest or contribute new by creating issues in this repo!
+
+### ⚖️ License
+
+This project is licensed under the terms of the [GNU General Public License v3.0](https://www.gnu.org/licenses/gpl-3.0.html).
+
+You are free to use, modify, and distribute this software under the conditions of the GPLv3.  
+See the [LICENSE](LICENSE) file for details.
