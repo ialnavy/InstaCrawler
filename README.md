@@ -117,7 +117,7 @@ python main.py not_following_back
 
 ---
 
-## 🏗️ Design and Architecture
+## 🏗️ Design & Architecture
 
 ### Cause
 
@@ -125,7 +125,7 @@ Although Python is not traditionally classified as a purely OOP language, I have
 
 Furthermore, this approach aligns well with the design philosophies outlined in the [GoF design patterns](https://en.wikipedia.org/wiki/Design_Patterns). These patterns offer proven solutions to common software design problems and promote best practices in software engineering. By integrating these patterns into the architecture, the application benefits from a robust and consistent structure that enhances both development efficiency and long-term code quality.
 
-### Diagram
+### Description of the Design & Architecture
 
 The application's architecture is built around the [Command design pattern](https://en.wikipedia.org/wiki/Command_pattern), leveraging its Macro-Command variant to deliver a highly modular and extensible solution. Each terminal instruction is encapsulated as a Macro-Command — a structured sequence of individual Commands, each representing a distinct operational step. This approach offers several key benefits:
 
@@ -148,6 +148,10 @@ The Selenium WebDriver marionette is encapsulated inside a hierarchy headed by t
 The `InstagramUser` class helps me define the `str()` method as I wish, for the entry of each Instagram user found in the output list. There is another type in the diagram called `UsersAsDomElements`, which may be a type of BeautifulSoup idk.
 
 ![InstaCrawler Class Diagram](multimedia/readme/InstaCrawler_class_diagram.svg "InstaCrawler Class Diagram")
+
+For the sake of understanding, this UML class diagram depicts all the classes involved in just the `not_following_back` order.
+
+The information described in this section may defer with the current implementation because of newer changes being implemented in the application. If that is the case and you find any mismatch, I beg you to report it to me.
 
 ---
 
