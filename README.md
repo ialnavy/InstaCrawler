@@ -45,12 +45,17 @@ InstaCrawler **does not store your info on the cloud**.
    ```
 
 3. **Configure environment variables**  
-   Edit the `.env` file to set your Edge user data directory, WebDriver path, and scraping parameters.
+   Edit the `.env` file to configure the environment variables.
+   
+   **It is mandatory** setting the path to your Edge user data directory, and the path to the WebDriver executable file.
+   
+   You may also adjust time parameters as you wish. This is not recommended unless you know what you are doing.
 
    Example:
    ```
-   NAVIGATOR_DATA_DIR_OF_USER=C:\Users\<YourUser>\AppData\Local\Microsoft\Edge\User Data\Default
+   NAVIGATOR_DATA_DIR_OF_USER=C:\Users\<YOUR_WINDOWS_USERNAME>\AppData\Local\Microsoft\Edge\User Data\Default
    NAVIGATOR_WEBDRIVER_PATH=D:\path\to\msedgedriver.exe
+
    TIMES_TO_SCROLL_DOWN_USER_CONTAINER=25
    SECONDS_TO_WAIT_AFTER_SCROLL=0.1
    SECONDS_TO_WAIT_FOR_USERS_CONTAINER_TO_LOAD=1.5
