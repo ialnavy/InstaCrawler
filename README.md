@@ -64,9 +64,11 @@ InstaCrawler **does not store your info on the cloud**.
 
    ![MS Edge Version Specifications](multimedia/readme/ms_edge_version_specs.jpg "MS Edge Version Specifications")
    
-   You may also adjust time parameters as you wish. Modifying this is not recommended, unless you know what you are doing.
+   You may also adjust time parameters as you wish. Modifying this is not recommended, unless you know what you are doing. These time parameters have been thoroughly tailored, so this application is able to run independently of the PC specs.
 
-   These time parameters have been thoroughly tailored, so this application is able to run independently of the PC specs. Extremely low PC specs, or Internet connection, could require a redefinition of these parameters.
+   Extremely low PC specs, or Internet connection, could require an increment of these values, so these defined wait times let the Instagram Webpage load for each step.
+   
+   You may also want to reduce these time values, so the apps works faster, if you have extremely good conditions, but do not try your luck, you could be mistaken as a DDoS attack by the Instagram servers.
 
    Example:
    ```
