@@ -1,7 +1,7 @@
 from marionette.UserLikeMsEdgeNav import UserLikeMsEdgeNav
 
 
-class CreateUserLikeNav:
+class CreateMarionette:
     """Class to create a UserLikeNav instance for Marionette navigation."""
 
     def __init__(self):

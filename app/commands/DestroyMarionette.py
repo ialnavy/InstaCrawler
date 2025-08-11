@@ -6,7 +6,4 @@ class DestroyMarionette:
 
 
     def execute(self):
-        print(r"""
-        [InstaCrawler] Closing Marionette browser session...
-        """)
         self.marionette.quit()
