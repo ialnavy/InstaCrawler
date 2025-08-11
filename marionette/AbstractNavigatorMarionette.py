@@ -19,6 +19,7 @@ class AbstractNavigatorMarionette(ABC):
     def __init__(self, delay_of_page_load = 3):
         self.webdriver_path = str(os.getenv("NAVIGATOR_WEBDRIVER_PATH"))
         self.user_data_dir = str(os.getenv("NAVIGATOR_DATA_DIR_OF_USER"))
+        self.user_agent = str(os.getenv("NAVIGATOR_USER_AGENT"))
         self.delay_of_page_load = delay_of_page_load # seconds
 
         # Internal components

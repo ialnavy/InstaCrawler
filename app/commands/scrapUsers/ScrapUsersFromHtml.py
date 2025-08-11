@@ -1,19 +1,14 @@
-
-import os
-import re
-import time
 from app.commands.scrapUsers.strategies.ScrapUsersStrategiesFactory import ScrapUsersStrategiesFactory
 from entities.InstagramSelectors import InstagramSelectors
-from entities.InstagramUser import InstagramUser
-from bs4 import BeautifulSoup
 
 
 class ScrapUsersFromHtml:
     """A command to retrieve the users from HTML DOM container."""
     
-    def __init__(self, marionette, users_container_selector):
+    def __init__(self, marionette, users_container_selector, collection_name):
         self.marionette = marionette
         self.users_container_selector = users_container_selector
+        self.collection_name = collection_name
         self.users = []
 
 

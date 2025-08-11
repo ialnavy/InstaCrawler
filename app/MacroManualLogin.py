@@ -1,10 +1,10 @@
-from app.commands.CommandFactory import CommandFactory
-
-
 class MacroManualLogin:
 
+    def __init__(self, command_factory, marionette):
+        self.command_factory = command_factory
+        self.marionette = marionette
+
     def execute(self):
-        marionette = CommandFactory.for_create_marionette().execute()
-        CommandFactory.for_verify_login(\
-            marionette = marionette,\
+        self.command_factory.for_verify_login(\
+            marionette = self.marionette,\
             is_manual_verification = True).execute()

@@ -1,28 +1,30 @@
-from app.commands.CommandFactory import CommandFactory
 from entities.InstagramSelectors import InstagramSelectors
 
 
 class MacroUsersNotFollowingBack:
 
-    def __init__(self):
+    def __init__(self, command_factory, marionette):
+        self.command_factory = command_factory
         self.followers = []
         self.following = []
         self.not_following_back = []
 
-        self.marionette = CommandFactory.for_create_marionette().execute()
+        self.marionette = marionette
         # The order of commands is important here, as they are individually
         # accessed later in the execute method.
         self.commands = [\
-            CommandFactory.for_verify_login(marionette = self.marionette,\
+            self.command_factory.for_verify_login(marionette = self.marionette,\
                                             is_manual_verification = False),\
-            CommandFactory.for_scrap_users(marionette = self.marionette,\
+            self.command_factory.for_scrap_users(marionette = self.marionette,\
                                          users_container_selector =\
-                                            InstagramSelectors.followers_link),\
-            CommandFactory.for_scrap_users(marionette = self.marionette,\
+                                            InstagramSelectors.followers_link,\
+                                                collection_name = "followers"),\
+            self.command_factory.for_scrap_users(marionette = self.marionette,\
                                          users_container_selector =\
-                                            InstagramSelectors.following_link),\
-            CommandFactory.for_destroy_marionette(marionette = self.marionette)]
-        
+                                            InstagramSelectors.following_link,\
+                                        collection_name = "following"),\
+            self.command_factory.for_destroy_marionette(marionette = self.marionette)]
+
 
     def __print_result(self):
         print(f"""

@@ -85,6 +85,9 @@ Run the main script with a command:
 python main.py <order>
 ```
 
+IMPORTANT! ⚠️
+This app has been tested with PowerShell. **Do not execute Powershell as administrator!**
+
 #### 📚 Available Orders
 
 - `help` — Show usage info.
@@ -127,6 +130,8 @@ The application's architecture is built around the [Command design pattern](http
 - **Support for undo/redo and logging**: The Command pattern naturally supports features like undo/redo operations and action logging, which are valuable in complex applications.
 
 By adopting this pattern, the application gains a robust and scalable foundation that simplifies command execution, enhances maintainability, and empowers future growth.
+
+Each command object is instantiated by an abstract factory object, following the [Abstract Factory pattern](https://en.wikipedia.org/wiki/Abstract_factory_pattern). This abstract factory object is instantiated just once, and it is common to the whole application, which also follows (ideally) the [Singleton pattern](https://en.wikipedia.org/wiki/Singleton_pattern). Each command, being created by its corresponding method of the command factory, performs a given operation, whose implementation could be easily modified just by swapping the class instantiated in that method.
 
 The Selenium WebDriver marionette is encapsulated inside a hierarchy headed by the abstract class `AbstractNavigatorMarionette`. This abstract class defines several abstract methods `init_<xxx>`, which are intended to initialise common configuration for the Marionette. These methods are invoked in the constructor of this abstract class, and must be overriden by each concrete class. This is an application of the [Template method pattern](https://en.wikipedia.org/wiki/Template_method_pattern).
 

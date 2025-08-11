@@ -1,8 +1,8 @@
 import sys
+
 from dotenv import load_dotenv
 
-from app.MacroManualLogin import MacroManualLogin
-from app.MacroUsersNotFollowingBack import MacroUsersNotFollowingBack
+from app.commands.CommandFactory import CommandFactory
 
 
 # Load environment variables from .env file
@@ -21,15 +21,25 @@ def main():
         print("[InstaCrawler] Bad order detected.")
         print_usage()
         sys.exit(1)
-    
+
     order = sys.argv[1]
     if order == "help":
         print("[InstaCrawler] See help below.")
         print_usage()
-    elif order == "manual_login":
-        MacroManualLogin().execute()
+        sys.exit(0)
+
+    command_factory = CommandFactory()
+    marionette = command_factory.for_create_marionette().execute()
+
+    if order == "manual_login":
+        command_factory.for_macro_manual_login(command_factory = command_factory,\
+                                               marionette = marionette).execute()
     elif order == "not_following_back":
-        MacroUsersNotFollowingBack().execute()
+        command_factory.for_macro_users_not_following_back(command_factory = command_factory,\
+                                                           marionette = marionette).execute()
+    
+    command_factory.for_destroy_marionette(marionette = marionette).execute()
+
     sys.exit(0)
 
 

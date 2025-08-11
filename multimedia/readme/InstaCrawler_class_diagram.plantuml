@@ -37,10 +37,10 @@ package "commands" as commands {
   }
 
   class "CommandFactory" as cf {
-    +{static}for_create_marionette() : Command
-    +{static}for_verify_login(marionette : AbstractNavigatorMarionette,\n is_manual_verification : bool) : Command
-    +{static}for_scrap_users(marionette: AbstractNavigatorMarionette,\n users_container_selector : str) : Command
-    +{static}for_destroy_marionette(marionette: AbstractNavigatorMarionette) : Command
+    +for_create_marionette() : Command
+    +for_verify_login(marionette : AbstractNavigatorMarionette,\n is_manual_verification : bool) : Command
+    +for_scrap_users(marionette: AbstractNavigatorMarionette,\n users_container_selector : str) : Command
+    +for_destroy_marionette(marionette: AbstractNavigatorMarionette) : Command
   }
 
   class "CreateUserLikeNav" as culn {
@@ -117,5 +117,6 @@ macro_nfb "1" -right-* "1" anm
 macro_nfb "1" -up-* "N" user
 macro_nfb "1" -down-* "N" c
 
-macro_nfb -down-> cf
+c "N" -down-* "1" cf
+macro_nfb "N" -down-* "1" cf
 @enduml
