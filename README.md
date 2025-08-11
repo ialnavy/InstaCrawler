@@ -53,15 +53,23 @@ InstaCrawler **does not store your info on the cloud**.
 3. **Configure environment variables**  
    Edit the `.env` file to configure the environment variables.
    
-   **It is mandatory** setting both the path to your Edge user data directory, and the path to the WebDriver executable file.
-   
-   You may also adjust time parameters as you wish. This is not recommended unless you know what you are doing.
+   **It is mandatory** setting the parameters related to your Web browser version specifications.
 
    Example:
    ```
    NAVIGATOR_DATA_DIR_OF_USER=C:\Users\<YOUR_WINDOWS_USERNAME>\AppData\Local\Microsoft\Edge\User Data\Default
    NAVIGATOR_WEBDRIVER_PATH=D:\path\to\msedgedriver.exe
+   NAVIGATOR_USER_AGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0
+   ```
 
+   ![MS Edge Version Specifications](multimedia/readme/ms_edge_version_specs.jpg "MS Edge Version Specifications")
+   
+   You may also adjust time parameters as you wish. Modifying this is not recommended, unless you know what you are doing.
+
+   These time parameters have been thoroughly tailored, so this application is able to run independently of the PC specs. Extremely low PC specs, or Internet connection, could require a redefinition of these parameters.
+
+   Example:
+   ```
    TIMES_TO_SCROLL_DOWN_USER_CONTAINER=25
    SECONDS_TO_WAIT_AFTER_SCROLL=0.1
    SECONDS_TO_WAIT_FOR_USERS_CONTAINER_TO_LOAD=1.5
@@ -73,7 +81,7 @@ The version of your MS Edge navigator **must match** with that of your `msedgedr
 
 You may find the version of you MS Edge navigator in this URL: `edge://version/`.
 
-![MS Edge version check](multimedia/readme/edge-version-check-advanced.jpg "MS Edge version check")
+![MS Edge Version](multimedia/readme/ms_edge_version.jpg "MS Edge Version")
 
 You may find the MS Edge WebDriver executable file for your specific version in the [MS Edge WebDriver versions directory](https://msedgewebdriverstorage.z22.web.core.windows.net/).
 
