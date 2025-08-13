@@ -56,18 +56,24 @@ def main():
     print(r"""
 [InstaCrawler] Retrieving list of users who follow you.
 """)
-    followers = command_factory.for_macro_extract_followers(\
+    followers = []
+    command_factory.for_macro_extract_followers(\
         command_factory = command_factory,\
         marionette = marionette,\
-        username = username).execute()
+        username = username,\
+        users = followers)\
+            .execute()
 
     print(r"""
 [InstaCrawler] Retrieving list of users whom you are following.
 """)
-    following = command_factory.for_macro_extract_following(\
+    following = []
+    command_factory.for_macro_extract_following(\
         command_factory = command_factory,\
         marionette = marionette,\
-        username = username).execute()
+        username = username,\
+        users = following)\
+            .execute()
 
     print(fr"""
 [InstaCrawler] Executing your order: '{order}'.

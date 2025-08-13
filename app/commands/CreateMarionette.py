@@ -9,8 +9,5 @@ class CreateMarionette:
 
 
     def execute(self):
-        print(r"""
-        [InstaCrawler] Starting Marionette browser session...
-        """)
         self.marionette = UserLikeMsEdgeNav()
         return self.marionette

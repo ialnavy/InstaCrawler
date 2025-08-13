@@ -34,8 +34,8 @@ class CommandFactory:
     def for_open_following(self, marionette, username = None):
         return OpenFollowing(marionette, username)
     
-    def for_scrap_users(self, marionette):
-        return ScrapUsers(marionette)
+    def for_scrap_users(self, marionette, users_as_dom_elements = None):
+        return ScrapUsers(marionette, users_as_dom_elements)
 
     def for_destroy_marionette(self, marionette):
         return DestroyMarionette(marionette)
@@ -44,8 +44,8 @@ class CommandFactory:
     # Tasks independent of the marionette.
     # ------------------------------------
 
-    def for_refine_users(self, marionette, users_as_dom_elements):
-        return RefineUsers(marionette, users_as_dom_elements)
+    def for_refine_users(self, marionette, users_as_dom_elements, refined_users = None):
+        return RefineUsers(marionette, users_as_dom_elements, refined_users)
     
     def for_export_users_not_following_back(self, followers, following, username = None):
         return ExportUsersNotFollowingBack(followers, following, username)
@@ -54,8 +54,8 @@ class CommandFactory:
     # Macro commands.
     # ---------------
 
-    def for_macro_extract_followers(self, command_factory, marionette, username = None):
-        return MacroExtractFollowers(command_factory, marionette, username)
+    def for_macro_extract_followers(self, command_factory, marionette, username = None, users = None):
+        return MacroExtractFollowers(command_factory, marionette, username, users)
     
-    def for_macro_extract_following(self, command_factory, marionette, username = None):
-        return MacroExtractFollowing(command_factory, marionette, username)
+    def for_macro_extract_following(self, command_factory, marionette, username = None, users = None):
+        return MacroExtractFollowing(command_factory, marionette, username, users)
