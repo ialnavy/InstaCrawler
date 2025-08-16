@@ -6,4 +6,7 @@ class DestroyMarionette:
 
 
     def execute(self):
+        print(r"""
+[InstaCrawler] Destroying marionette...
+""")
         self.marionette.quit()

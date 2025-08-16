@@ -2,8 +2,8 @@ import sys
 
 from dotenv import load_dotenv
 
-from app.CommandFactory import CommandFactory
-from entities.InstagramSelectors import InstagramSelectors
+from app.FactoryHub import FactoryHub
+from marionette.UserLikeMsEdgeNav import UserLikeMsEdgeNav
 
 
 # Load environment variables from .env file
@@ -31,63 +31,27 @@ def main():
         print_usage()
         sys.exit(0)
 
-    # Initialise the command factory and marionette
-    print(r"""
-[InstaCrawler] Initialising command factory and marionette...
+
+        print(r"""
+[InstaCrawler] Initialising factory hub and marionette...
 """)
-    command_factory = CommandFactory()
-    marionette = command_factory.for_create_marionette().execute()
+    factory_hub = FactoryHub()
+    marionette = UserLikeMsEdgeNav()
 
     print(r"""
 [InstaCrawler] Verifying login...
 """)
-    command_factory.for_verify_login(\
-        marionette = marionette,\
-        is_manual_verification = (order == "manual_login")).execute()
-
-    print(r"""
-[InstaCrawler] Retrieving logged username...
-""")
-    username = command_factory.for_obtain_user_profile(marionette).execute()
-    print(fr"""
-[InstaCrawler] Your username has been retrieved: '{username}'.
-""")
-    
-    print(r"""
-[InstaCrawler] Retrieving list of users who follow you.
-""")
-    followers = []
-    command_factory.for_macro_extract_followers(\
-        command_factory = command_factory,\
-        marionette = marionette,\
-        username = username,\
-        users = followers)\
-            .execute()
-
-    print(r"""
-[InstaCrawler] Retrieving list of users whom you are following.
-""")
-    following = []
-    command_factory.for_macro_extract_following(\
-        command_factory = command_factory,\
-        marionette = marionette,\
-        username = username,\
-        users = following)\
-            .execute()
+    factory_hub.for_marionette_commands()\
+        .for_verify_login(\
+            marionette = marionette,\
+            is_manual_verification = (order == "manual_login")).execute()
 
     print(fr"""
 [InstaCrawler] Executing your order: '{order}'.
 """)
     if order == "not_following_back":
-        command_factory.for_export_users_not_following_back(\
-            followers = followers,\
-            following = following,\
-            username = username).execute()
-
-    print(r"""
-[InstaCrawler] Destroying marionette...
-""")
-    command_factory.for_destroy_marionette(marionette = marionette).execute()
+        factory_hub.for_order_commands()\
+            .for_users_not_following_back_order(factory_hub, marionette).execute()
 
     sys.exit(0)
 

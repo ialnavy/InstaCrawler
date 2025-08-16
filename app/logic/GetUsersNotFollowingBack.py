@@ -1,7 +1,8 @@
-class ExportUsersNotFollowingBack:
-    def __init__(self, followers = [], following = [], username = None):
+class GetUsersNotFollowingBack:
+    def __init__(self, followers = [], following = [], not_following_back = [], username = None):
         self.followers = followers
         self.following = following
+        self.not_following_back = not_following_back
         self.username = username
         self.not_following_back = []
 
@@ -17,10 +18,14 @@ class ExportUsersNotFollowingBack:
             print("- " + str(user))
 
     def execute(self):
-        self.not_following_back = [\
+        not_following_back = [\
             user_followed for user_followed in self.following\
                 if user_followed.user_id not in\
                     {user_follower.user_id for user_follower in self.followers}]
+        
+        if self.not_following_back is None:
+            self.not_following_back = []
+        self.not_following_back[:] = not_following_back
         
         self.__print_result()
 
