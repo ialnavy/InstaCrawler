@@ -10,8 +10,8 @@ class GetUsersNotFollowingBack:
         print(fr"""
 [InstaCrawler] Result is ready!
     
-{self.pojo.username} has {str(len(self.followers))} followers
-{self.pojo.username} is following {str(len(self.following))} other users
+{self.pojo.username or "User"} has {str(len(self.followers))} followers
+{self.pojo.username or "User"} is following {str(len(self.following))} other users
 """)
         print("Users not following back:")
         for user in self.not_following_back:
