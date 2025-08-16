@@ -1,8 +1,8 @@
 class MacroExtractFollowing:
-    def __init__(self, factory_hub, marionette, username = None, users = None):
+    def __init__(self, factory_hub, marionette, pojo, users = None):
         self.factory_hub = factory_hub
         self.marionette = marionette
-        self.username = username
+        self.pojo = pojo
         self.users = users
 
         self.refined_users = []
@@ -13,7 +13,7 @@ class MacroExtractFollowing:
             self.factory_hub.for_marionette_commands()\
                 .for_open_following(\
                     marionette = self.marionette,\
-                    username = self.username),\
+                    username = self.pojo.username),\
             
             self.factory_hub.for_marionette_commands()\
                 .for_scrap_users(\

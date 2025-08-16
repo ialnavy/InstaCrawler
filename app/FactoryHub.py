@@ -1,3 +1,4 @@
+import yaml
 from app.LogicCommandsFactory import LogicCommandsFactory
 from app.OrderCommandsFactory import OrderCommandsFactory
 from app.MarionetteCommandsFactory import MarionetteCommandsFactory
@@ -9,6 +10,12 @@ class FactoryHub:
         self.marionette_commands_factory = MarionetteCommandsFactory()
         self.logic_commands_factory = LogicCommandsFactory()
         self.order_commands_factory = OrderCommandsFactory()
+
+
+    def for_config(self):
+        with open("config.yaml", "r") as file:
+            config = yaml.safe_load(file)
+        return config
 
 
     def for_marionette_commands(self):

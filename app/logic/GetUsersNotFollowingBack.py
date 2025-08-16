@@ -1,17 +1,17 @@
 class GetUsersNotFollowingBack:
-    def __init__(self, followers = [], following = [], not_following_back = [], username = None):
+    def __init__(self, pojo, followers = [], following = [], not_following_back = []):
+        self.pojo = pojo
         self.followers = followers
         self.following = following
         self.not_following_back = not_following_back
-        self.username = username
         self.not_following_back = []
 
     def __print_result(self):
         print(fr"""
 [InstaCrawler] Result is ready!
     
-{self.username} has {str(len(self.followers))} followers
-{self.username} is following {str(len(self.following))} other users
+{self.pojo.username} has {str(len(self.followers))} followers
+{self.pojo.username} is following {str(len(self.following))} other users
 """)
         print("Users not following back:")
         for user in self.not_following_back:

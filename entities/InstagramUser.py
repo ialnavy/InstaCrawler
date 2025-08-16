@@ -9,3 +9,9 @@ class InstagramUser:
         output = "" + self.full_name
         output += " (" + self.user_id + ")"
         return output
+    
+    def as_dict(self):
+        return {
+            "User ID": str(self.user_id).replace(",", ""),
+            "Full Name": str(self.full_name).replace(",", "")
+        }

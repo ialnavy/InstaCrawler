@@ -1,0 +1,8 @@
+app:
+  name: InstaCrawler
+  version: 1.0
+
+paths:
+  export_dir: "export"
+  export_followers_subdir: "followers"
+  export_following_subdir: "following"

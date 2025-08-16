@@ -2,3 +2,4 @@ beautifulsoup4==4.12.2
 requests==2.31.0
 selenium==4.34.2
 dotenv==0.9.9
+PyYAML==6.0.2
