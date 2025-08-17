@@ -102,9 +102,12 @@ This app has been tested with PowerShell. **Do not execute Powershell as adminis
 
 - `help` — Show usage info.
 - `manual_login` — Open Instagram for manual login (if you want to change the logged-in account, for example).
-- `not_following_back` — List users you follow who don’t follow you back.
+- `extract_followers` - Open Instagram and scrape the list of users who follow you.
+- `extract_following` - Open Instagram and scrape the list of users whom you follow.
+- `not_following_back` - List users you follow who don’t follow you back. Uses the info gathered by previous `extract_followers` and `extract_following` invokations (no marionette is needed).
+- `not_following_back_complete` - List users you follow who don’t follow you back. Makes `extract_followers` and `extract_following` invokations for this purpose.
 
-You need to log-in into Instagram before you invoke any operation; that is why we have the "manual_login" operation. Your log-in info will be stored among the `NAVIGATOR_DATA_DIR_OF_USER` folder contents.
+You need to log-in into Instagram before you invoke any operation, if marionette is needed; that is why we have the "manual_login" operation. Your log-in info will be stored among the `NAVIGATOR_DATA_DIR_OF_USER` folder contents.
 
 #### 💡 Example
 
@@ -113,10 +116,31 @@ python main.py manual_login
 # A browser window will be opened.
 # Log in to Instagram, then close that window.
 
+python main.py extract_followers
+# Your Instagram profile will be opened,
+# and the list of users who follow you will be scrapped.
+# The more users follow you,
+# the more time this operation will take.
+
+python main.py extract_following
+# Your Instagram profile will be opened,
+# and the list of users whom you follow will be scrapped.
+# The more users you follow,
+# the more time this operation will take.
+
 python main.py not_following_back
 # See who’s not following you back!
-# The more followers / following users your account has,
-# the more time this operation will take.
+```
+
+The following sequence of commands is equivalent to the previous one.
+
+```sh
+python main.py manual_login
+# A browser window will be opened.
+# Log in to Instagram, then close that window.
+
+python main.py not_following_back_complete
+# See who’s not following you back!
 ```
 
 ## ℹ️ Advanced Information of the Application
