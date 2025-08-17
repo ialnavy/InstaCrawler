@@ -4,9 +4,7 @@ class ExtractFollowingOrder:
         self.factory_hub = factory_hub
         self.marionette = marionette
         self.username = ""
-        self.followers = []
         self.following = []
-        self.not_following_back = []
 
         self.commands = [\
             self.factory_hub.for_marionette_commands()\

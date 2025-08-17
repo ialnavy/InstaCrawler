@@ -1,6 +1,8 @@
 @startuml
+left to right direction
+
 package "marionette" as marionette {
-  abstract class "AbstractNavigatorMarionette" as anm {
+  abstract class "AbstractNavigatorMarionette" as abstract_navigator_marionette {
     webdriver_path : str
     user_data_dir : str
     delay_of_page_load : int
@@ -14,13 +16,13 @@ package "marionette" as marionette {
     quit() : void
   }
 
-  class "UserLikeMsEdgeNav" as ulmen {
+  class "UserLikeMsEdgeNav" as user_like_ms_edge_nav {
     init_options() : void
     init_service() : void
     init_driver() : void
   }
 
-  ulmen -up-|> anm
+  user_like_ms_edge_nav -up-|> abstract_navigator_marionette
 }
 
 
@@ -31,92 +33,209 @@ package "entities" as entities {
   }
 }
 
-package "commands" as commands {
-  interface "Command" as c {
+package "app" as app {
+  class "FactoryHub" as factory_hub {
+    +for_config() : DictFromYaml
+
+    +for_marionette_commands() : MarionetteCommandsFactory
+    +for_logic_commands() : LogicCommandsFactory
+    +for_order_commands() : OrderCommandsFactory
+  }
+
+  interface "Command" as command {
     execute() : obj
   }
 
-  class "CommandFactory" as cf {
-    +for_create_marionette() : Command
-    +for_verify_login(marionette : AbstractNavigatorMarionette,\n is_manual_verification : bool) : Command
-    +for_scrap_users(marionette: AbstractNavigatorMarionette,\n users_container_selector : str) : Command
-    +for_destroy_marionette(marionette: AbstractNavigatorMarionette) : Command
+  class "OrderCommandsFactory" as order_commands_factory {
+    +for_extract_followers_order(\n\tfactory_hub : FactoryHub,\n\tmarionette : AbstractNavigatorMarionette)\n\t\t: ExtractFollowersOrder
+
+    +for_extract_following_order(\n\tfactory_hub : FactoryHub,\n\tmarionette : AbstractNavigatorMarionette)\n\t\t: ExtractFollowingOrder
+
+    +for_users_not_following_back_order(\n\tfactory_hub : FactoryHub)\n\t\t: UsersNotFollowingBackOrder
+
+    +for_users_not_following_back_complete_order(\n\tfactory_hub : FactoryHub,\n\tmarionette : AbstractNavigatorMarionette)\n\t\t: UsersNotFollowingBackCompleteOrder
   }
 
-  class "CreateUserLikeNav" as culn {
-    execute() : AbstractNavigatorMarionette
-  }
-  culn -up-|> c
-  cf -down-> culn
+  class "LogicCommandsFactory" as logic_commands_factory {
+    +for_export_users(\n\tfactory_hub : FactoryHub,\n\tsubdir : str,\n\tpojo : UsernameSettable,\n\tusers : InstagramUser[])\n\t\t: ExportUsers
 
-  class "DestroyMarionette" as dm {
-    execute() : void
-  }
-  dm -up-|> c
-  cf -down-> dm
+    +for_read_users(\n\tfactory_hub : FactoryHub,\n\tsubdir : str,\n\tpojo : UsernameSettable,\n\tusers : InstagramUser[])\n\t\t: ReadUsers
 
-  class "VerifyLogin" as vl {
-    execute() : void
-  }
-  vl -up-|> c
-  cf -down-> vl
+    +for_refine_users(\n\tmarionette : AbstractNavigatorMarionette,\n\tusers_as_dom_elements : UsersAsDomElements[],\n\trefined_users : InstagramUser[])\n\t\t: RefineUsers
 
-  class "ScrapUsersFromHtml" as sufh {
-    execute() : void
-  }
-  sufh -up-|> c
-  cf -down-> sufh
+    +for_get_users_not_following_back(\n\tpojo : UsernameSettable,\n\tfollowers : InstagramUser[],\n\tfollowing : InstagramUser[],\n\tnot_following_back : InstagramUser[])\n\t\t: GetUsersNotFollowingBack
 
-  package "scrapUsers.strategies" as su_str {
-    class "ScrapUsersStrategiesFactory" as susf {
-      +{static}for_list_users_dom() : ListUsersDom
-      +{static}for_scrap_users_dom() : ScrapUsersDom
-      +{static}for_refine_users() : RefineUsers
+    +for_macro_extract_followers(\n\tfactory_hub : FactoryHub,\n\tmarionette : AbstractNavigatorMarionette,\n\tpojo : UsernameSettable,\n\tusers : InstagramUser[])\n\t\t: MacroExtractFollowers
+
+    +for_macro_extract_following(\n\tfactory_hub : FactoryHub,\n\tmarionette : AbstractNavigatorMarionette,\n\tpojo : UsernameSettable,\n\tusers : InstagramUser[])\n\t\t: MacroExtractFollowing
+  }
+
+  class "MarionetteCommandsFactory" as marionette_commands_factory {
+    +for_verify_login(\n\tmarionette : AbstractNavigatorMarionette,\n\tis_manual_verification : bool)\n\t\t: VerifyLogin
+    
+    +for_obtain_user_profile(\n\tmarionette : AbstractNavigatorMarionette,\n\tpojo : UsernameSettable)\n\t\t: ObtainUserProfile
+
+    +for_open_followers(\n\tmarionette : AbstractNavigatorMarionette,\n\tusername : str)\n\t\t: OpenFollowers
+
+    +for_open_following(\n\tmarionette : AbstractNavigatorMarionette,\n\tusername : str)\n\t\t: OpenFollowing
+
+    +for_scrap_users(\n\tmarionette : AbstractNavigatorMarionette,\n\tusers_as_dom_elements : UsersAsDomElements[])\n\t\t: ScrapUsersFromHtml
+
+    +for_destroy_marionette(\n\tmarionette : AbstractNavigatorMarionette)\n\t\t: DestroyMarionette
+  }
+
+  factory_hub "1" --* "1" order_commands_factory
+  factory_hub "1" --* "1" logic_commands_factory
+  factory_hub "1" --* "1" marionette_commands_factory
+
+  package "order" as order {
+
+    interface "UsernameSettable" as username_settable {
+      +username : str
+      +set_username(username : str) : void
     }
 
-    class "ListUsersDom" as su_str_lud {
-      +do_list_users_dom(marionette\n : AbstractNavigatorMarionette) : UsersAsDomElements[]
+    class "ExtractFollowersOrder" as extract_followers_order {
+      factory_hub : FactoryHub
+      marionette : AbstractNavigatorMarionette
+      followers : InstagramUser[]
     }
-    susf --> su_str_lud
+    extract_followers_order -up-|> username_settable
+    extract_followers_order "1" --* "N" command
 
-    class "RefineUsers" as su_str_ru {
-      +do_refine_users(users_as_dom_elements\n : UsersAsDomElements) : InstagramUser[]
+    class "ExtractFollowingOrder" as extract_following_order {
+      factory_hub : FactoryHub
+      marionette : AbstractNavigatorMarionette
+      following : InstagramUser[]
     }
-    susf --> su_str_ru
+    extract_following_order -up-|> username_settable
+    extract_following_order "1" --* "N" command
 
-    class "ScrapUsersDom" as su_str_sud {
-      +do_scrap_users_dom(marionette\n : AbstractNavigatorMarionette) : void
+    class "UsersNotFollowingBackCompleteOrder" as users_not_following_back_complete_order {
+      factory_hub : FactoryHub
+      marionette : AbstractNavigatorMarionette
+      followers : InstagramUser[]
+      following : InstagramUser[]
+      not_following_back : InstagramUser[]
     }
-    susf --> su_str_sud
-    note top of su_str_sud
-      This class makes use of
-      environment parameters
-      related to wait times.
+    users_not_following_back_complete_order -up-|> username_settable
+    users_not_following_back_complete_order "1" --* "N" command
+
+    class "UsersNotFollowingBackOrder" as users_not_following_back_order {
+      factory_hub : FactoryHub
+      followers : InstagramUser[]
+      following : InstagramUser[]
+      not_following_back : InstagramUser[]
+    }
+    users_not_following_back_order -up-|> username_settable
+    users_not_following_back_order "1" --* "N" command
+    
+    note as note_macro_commands
+      // Commands of "order" package
+      // are Macro-Commands. That is,
+      // in its execute() method:
+
+      for command in self.commands:
+        command.execute()
     end note
 
-    sufh --> susf
+    note as order_commands_inheritance
+      All the commands in this package
+      inherit from the "Command" interface.
+    end note
   }
+  order_commands_factory --> order
+
+  package "marionette" as marionette {
+    class "DestroyMarionette" as destroy_marionette {
+      marionette : AbstractNavigatorMarionette
+    }
+
+    class "ObtainUserProfile" as obtain_user_profile {
+      marionette : AbstractNavigatorMarionette
+      pojo : UsernameSettable
+    }
+
+    class "OpenFollowers" as open_followers {
+      marionette : AbstractNavigatorMarionette
+      username : str
+    }
+
+    class "OpenFollowing" as open_following {
+      marionette : AbstractNavigatorMarionette
+      username : str
+    }
+
+    class "ScrapUsers" as scrap_users {
+      marionette : AbstractNavigatorMarionette
+      users_as_dom_elements : UsersAsDomElements[]
+    }
+
+    class "VerifyLogin" as verify_login {
+      marionette : AbstractNavigatorMarionette
+      is_manual_verification : bool
+    }
+
+    note as marionette_commands_inheritance
+      All the commands in this package
+      inherit from the "Command" interface.
+    end note
+  }
+  marionette_commands_factory --> marionette
+
+  package "logic" as logic {
+    class "ExportUsers" as export_users {
+      factory_hub : FactoryHub
+      subdir : str
+      pojo : UsernameSettable
+      users : InstagramUser[]
+    }
+
+    class "GetUsersNotFollowingBack" as get_users_not_following_back {
+      pojo : UsernameSettable
+      followers : InstagramUser[]
+      following : InstagramUser[]
+      not_following_back : InstagramUser[]
+    }
+
+    class "MacroExtractFollowers" as macro_extract_followers {
+      factory_hub : FactoryHub
+      marionette : AbstractNavigatorMarionette
+      pojo : UsernameSettable
+      users : InstagramUser[]
+    }
+
+    class "MacroExtractFollowing" as macro_extract_following {
+      factory_hub : FactoryHub
+      marionette : AbstractNavigatorMarionette
+      pojo : UsernameSettable
+      users : InstagramUser[]
+    }
+
+    class "ReadUsers" as read_users {
+      factory_hub : FactoryHub
+      subdir : str
+      pojo : UsernameSettable
+      users : InstagramUser[]
+    }
+
+    class "RefineUsers" as refine_users {
+      marionette : AbstractNavigatorMarionette
+      users_as_dom_elements : UsersAsDomElements[]
+      refined_users : InstagramUser[]
+    }
+
+    note as logic_commands_inheritance
+      All the commands in this package
+      inherit from the "Command" interface.
+    end note
+  }
+  logic_commands_factory -> logic
 }
 
+class "main" as main {}
 
-class "MacroUsersNotFollowingBack" as macro_nfb {
-  marionette : AbstractNavigatorMarionette
-  followers : InstagramUser[]
-  following : InstagramUser[]
-  commands : Command[]
+main --> factory_hub
+main --> abstract_navigator_marionette
 
-  execute() : obj
-}
-
-note left of macro_nfb::execute
-  for command in self.commands:
-    command.execute()
-end note
-
-macro_nfb "1" -right-* "1" anm
-macro_nfb "1" -up-* "N" user
-macro_nfb "1" -down-* "N" c
-
-c "N" -down-* "1" cf
-macro_nfb "N" -down-* "1" cf
 @enduml

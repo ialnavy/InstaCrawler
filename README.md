@@ -66,7 +66,7 @@ InstaCrawler **does not store your info on the cloud**.
    
    You may also adjust time parameters as you wish. Modifying this is not recommended, unless you know what you are doing. These time parameters have been thoroughly tailored, so this application is able to run independently of the PC specs.
 
-   Extremely low PC specs, or Internet connection, could require an increment of these values, so these defined wait times let the Instagram Webpage load for each step.
+   Extremely low PC specs or a slow Internet connection may require increasing these values to allow the Instagram webpage to load at each step.
    
    You may also want to reduce these time values, so the apps works faster, if you have extremely good conditions, but do not try your luck, you could be mistaken as a DDoS attack by the Instagram servers.
 
@@ -79,7 +79,7 @@ InstaCrawler **does not store your info on the cloud**.
 
 ### 📜 Prerequirements
 
-The version of your MS Edge navigator **must match** with that of your `msedgedriver.exe`.
+The version of your MS Edge browser **must match** with that of your `msedgedriver.exe`.
 
 You may find the version of you MS Edge navigator in this URL: `edge://version/`.
 
@@ -132,7 +132,7 @@ python main.py not_following_back
 # See who’s not following you back!
 ```
 
-The following sequence of commands is equivalent to the previous one.
+The following sequence of commands is equivalent to the previous sequence.
 
 ```sh
 python main.py manual_login
@@ -151,21 +151,20 @@ python main.py not_following_back_complete
 
 Although Python is not traditionally classified as a purely OOP language, I have chosen to adopt an architecture grounded in this paradigm. This decision is driven by the desire to introduce a high level of standardization and modularity into the application's design. By leveraging OOP principles, such as encapsulation, inheritance, and polymorphism, the codebase becomes more maintainable, scalable, and easier to understand.
 
-Furthermore, this approach aligns well with the design philosophies outlined in the [GoF design patterns](https://en.wikipedia.org/wiki/Design_Patterns). These patterns offer proven solutions to common software design problems and promote best practices in software engineering. By integrating these patterns into the architecture, the application benefits from a robust and consistent structure that enhances both development efficiency and long-term code quality.
+Furthermore, this approach aligns well with the design philosophies outlined in the [GoF design patterns](https://en.wikipedia.org/wiki/Design_Patterns). These patterns offer proven solutions to common Software design problems and promote best practices in Software Engineering. By integrating these patterns into the architecture, the application benefits from a robust and consistent structure that enhances both development efficiency and long-term code quality.
 
 #### Description of the Design & Architecture
 
 The application's architecture is built around the [Command design pattern](https://en.wikipedia.org/wiki/Command_pattern), leveraging its Macro-Command variant to deliver a highly modular and extensible solution. Each terminal instruction is encapsulated as a Macro-Command — a structured sequence of individual Commands, each representing a distinct operational step. This approach offers several key benefits:
 
-- **Decoupling of responsibilities**: Commands encapsulate specific actions, allowing the system to separate the logic of executing operations from the objects that invoke them.
+- **Decoupling of responsibilities**: Commands encapsulate specific actions, allowing the System to separate the logic of executing operations from the objects that invoke them.
 - **Reusability and composability**: Individual Commands can be reused across different Macro-Commands, promoting cleaner code and reducing duplication.
-- **Flexibility through strategy integration**: Each Command can incorporate its own strategy, enabling dynamic behavior customization without altering the core structure.
-- **Ease of extension and maintenance**: New functionality can be added simply by introducing new Commands or modifying existing ones, without disrupting the overall system.
+- **Ease of extension and maintenance**: New functionality can be added simply by introducing new Commands or modifying existing ones, without disrupting the overall System.
 - **Support for undo/redo and logging**: The Command pattern naturally supports features like undo/redo operations and action logging, which are valuable in complex applications.
 
 By adopting this pattern, the application gains a robust and scalable foundation that simplifies command execution, enhances maintainability, and empowers future growth.
 
-Each command object is instantiated by an abstract factory object, following the [Abstract Factory pattern](https://en.wikipedia.org/wiki/Abstract_factory_pattern). This abstract factory object is instantiated just once, and it is common to the whole application, which also follows (ideally) the [Singleton pattern](https://en.wikipedia.org/wiki/Singleton_pattern). Each command, being created by its corresponding method of the command factory, performs a given operation, whose implementation could be easily modified just by swapping the class instantiated in that method.
+Each command object is instantiated by an abstract factory object, following the [Abstract Factory pattern](https://en.wikipedia.org/wiki/Abstract_factory_pattern). These abstract factory objects (such as LogicCommandsFactory, OrderCommandsFactory, and MarionetteCommandsFactory), each of them representing a different family of commands, are instantiated once and managed by the FactoryHub class, which acts as a centralized access point for all command factories. The FactoryHub itself is intended to follow the [Singleton pattern](https://en.wikipedia.org/wiki/Singleton_pattern), ensuring a single shared instance throughout the application. Each command, created by its corresponding method of the command factory, performs a specific operation whose implementation can be easily modified by swapping the class instantiated in that method. I also considered that the FactoryHub could manage each abstract factory object using the [Prototype pattern](https://en.wikipedia.org/wiki/Prototype_pattern). This approach could offer benefits such as simplifying the creation of new factory instances, enabling dynamic configuration at runtime, and reducing the overhead of repeatedly initialising complex objects. However, this is not required at present.
 
 The Selenium WebDriver marionette is encapsulated inside a hierarchy headed by the abstract class `AbstractNavigatorMarionette`. This abstract class defines several abstract methods `init_<xxx>`, which are intended to initialise common configuration for the Marionette. These methods are invoked in the constructor of this abstract class, and must be overriden by each concrete class. This is an application of the [Template method pattern](https://en.wikipedia.org/wiki/Template_method_pattern).
 
@@ -179,22 +178,20 @@ The `InstagramUser` class helps me define the `str()` method as I wish, for the 
 
 ![InstaCrawler Class Diagram](multimedia/readme/InstaCrawler_class_diagram.svg "InstaCrawler Class Diagram")
 
-For the sake of understanding, this UML class diagram depicts all the classes involved in just the `not_following_back` order.
-
-The information described in this section may defer with the current implementation because of newer changes being implemented in the application. If that is the case and you find any mismatch, I beg you to report it to me.
+The information described in this section may differ from the current implementation because of newer changes being implemented in the application. If that is the case and you find any mismatch, please report it to me.
 
 ### 🔮 Envisaged Extensions
 
+- [ ] Replace some keywords, such as the headers of the CSV files of exported users, with externalised variables in `config.yaml`.
 - [ ] Replace the `InstagramSelectors` class with a YAML file.
 - [ ] Add support for other browsers (Chrome, Firefox, etc.)
 - [ ] Implement headless mode for background operation
-- [ ] Export results to CSV or Excel
-- [ ] Add more Instagram automation features (e.g., auto-like, auto-comment, auto-download of images and videos)
+- [ ] Define and develop further Instagram automation features (e.g., auto-like, auto-comment, auto-download of images and videos)
 - [ ] Support for multi-account management
 
 Future changes of the Instagram UI from Meta may require updates, such as to selectors in [`entities/InstagramSelectors.py`](entities/InstagramSelectors.py).
 
-Feel free to suggest or contribute new by creating issues in this repo!
+Feel free to suggest or contribute new features by creating issues in this repo!
 
 ### ⚖️ License
 
