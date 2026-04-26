@@ -13,8 +13,8 @@ class InstagramSelectors:
     followers_link = "a[href*=\"followers\"]"
     following_link = "a[href*=\"following\"]"
 
-    scrollable_div = "body > div:last-of-type > div:last-of-type > div:first-of-type > div:first-of-type > div:first-of-type > div:first-of-type > div:nth-of-type(2) > div:first-of-type > div:first-of-type > div:first-of-type > div:first-of-type > div:last-of-type > div:first-of-type > div:first-of-type > div:last-of-type"
-    container_of_users = "body > div:last-of-type > div:last-of-type > div:first-of-type > div:first-of-type > div:first-of-type > div:first-of-type > div:nth-of-type(2) > div:first-of-type > div:first-of-type > div:first-of-type > div:first-of-type > div:last-of-type > div:first-of-type > div:first-of-type > div:last-of-type > div:first-of-type > div:first-of-type"
+    scrollable_div = "body > div:last-of-type > div:nth-of-type(2) > div > div:first-of-type > div > div:nth-of-type(2) > div > div > div > div > div:nth-of-type(2) > div > div > div:nth-of-type(3)"
+    container_of_users = scrollable_div + " > div:first-of-type > div:first-of-type"
     
     user_id_1 = 'div > div > div > div:nth-of-type(2) > div > div > div:first-of-type > div > span > div > a > div > div > span'
     user_id_2 = 'div > div > div > div:nth-of-type(2) > div > div > div:first-of-type > a > div > span > div'
