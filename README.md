@@ -85,7 +85,7 @@ You may find the version of you MS Edge navigator in this URL: `edge://version/`
 
 ![MS Edge Version](multimedia/readme/ms_edge_version.jpg "MS Edge Version")
 
-You may find the MS Edge WebDriver executable file for your specific version in the [MS Edge WebDriver versions directory](https://msedgewebdriverstorage.z22.web.core.windows.net/).
+You may find the MS Edge WebDriver executable file for your specific version in the [MS Edge WebDriver versions directory](https://msedgedriver.microsoft.com/catalog/index.html).
 
 ### 🏁 Usage
 
