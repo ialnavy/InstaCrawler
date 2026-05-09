@@ -10,8 +10,8 @@ class InstagramSelectors:
     # Profile page elements
     logged_user_id= "body > div:first-of-type > div > div > div:nth-of-type(2) > div > div > div:first-of-type > div:nth-of-type(2) > div:first-of-type > section > main > div > div > header > section:nth-of-type(2) > div > div > div:first-of-type > div > a > h2 > span"
 
-    followers_link = "a[href*=\"followers\"]"
-    following_link = "a[href*=\"following\"]"
+    followers_link = "body > div:first-of-type > div > div > div:nth-of-type(2) > div > div > div:first-of-type > div:nth-of-type(2) > div:last-of-type > section > main > div > div > header > div > section:last-of-type > div > div:last-of-type > div:nth-of-type(2) > a:first-of-type"
+    following_link = "body > div:first-of-type > div > div > div:nth-of-type(2) > div > div > div:first-of-type > div:nth-of-type(2) > div:last-of-type > section > main > div > div > header > div > section:last-of-type > div > div:last-of-type > div:nth-of-type(3) > a:first-of-type"
 
     scrollable_div = "body > div:last-of-type > div:nth-of-type(2) > div > div:first-of-type > div > div:nth-of-type(2) > div > div > div > div > div:nth-of-type(2) > div > div > div:nth-of-type(3)"
     container_of_users = scrollable_div + " > div:first-of-type > div:first-of-type"
